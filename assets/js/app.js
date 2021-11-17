@@ -5,6 +5,23 @@ let wordUser = "pierre", a = 0, scoreUser = 0, scoreIA = 0
 scoreu.textContent = scoreUser
 scoreia.textContent = scoreIA
 
+containerForm.addEventListener("click", (e) => {
+
+    if(e.target.nodeName == "IMG"){
+        document.getElementById(`${wordUser}IMG`).src = `assets/img/${wordUser}.png`
+        e.target.src = `assets/img/${e.target.alt}Clicked.png`
+
+        wordUser = e.target.alt
+        a = e.target.dataset.number
+    }
+
+    if(e.target.nodeName == "BUTTON"){
+        b = Math.floor(Math.random() * shiFuMi.length)
+        wordIA = shiFuMi[b]
+        a == b ? setScore(null, "null") : a < b && a == b-1 || a == 2 && a == b+2 ? setScore(scoreu, "User") : setScore(scoreia, "IA")
+    }
+})
+
 function setScore(id, user){
 
     if(user == "null"){
@@ -22,20 +39,3 @@ function setScore(id, user){
     imgUser.src = `assets/img/${wordUser}.png`
     imgIA.src = `assets/img/${wordIA}.png`
 }
-
-containerForm.addEventListener("click", (e) => {
-
-    if(e.target.nodeName == "IMG"){
-        document.getElementById(`${wordUser}IMG`).src = `assets/img/${wordUser}.png`
-        e.target.src = `assets/img/${e.target.alt}Clicked.png`
-
-        wordUser = e.target.alt
-        a = e.target.dataset.number
-    }
-
-    if(e.target.nodeName == "BUTTON"){
-        b = Math.floor(Math.random() * shiFuMi.length)
-        wordIA = shiFuMi[b]
-        a == b ? setScore(null, "null") : a < b && a == b-1 || a == 2 && a == b+2 ? setScore(scoreu, "User") : setScore(scoreia, "IA")
-    }
-})
